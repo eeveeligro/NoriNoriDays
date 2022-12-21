@@ -1,12 +1,12 @@
 {
-  "short_name": "TohokuApp",
-  "name": "TohokuApp",
+  "short_name": "NoriNori",
+  "name": "NoriNori-Days",
   "version" : "0.1.0",
   "private" : true,
-  "homepage" : "https://a-orgil.github.io/tohoku-app/",
+  "homepage" : "https://eeveeligro.github.io/NoriNoriDays/",
   "icons": [
     {
-      "src": "haganekun.ico",
+      "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },

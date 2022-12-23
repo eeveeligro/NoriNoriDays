@@ -14,18 +14,29 @@ import GetAppIcon from '@mui/icons-material/GetApp';
 import WarehouseIcon from '@mui/icons-material/Warehouse';
 import SearchIcon from '@mui/icons-material/Search';
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
-import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { MenuButton } from '../components/MenuButton';
 import { BottomButton } from '../components/BottomButton';
 import { UserName } from '../components/UserName';
 import CustomDialog from '../components/CustomDialog';
+import { collection, doc, DocumentData, getDocs, QueryDocumentSnapshot } from 'firebase/firestore';
+import db from '../firebase';
+import Todo from './Todo';
 
 function TopMenu(){
-    const [ menu, setMenu ] = useState(0);
     const [ loggedIn, setLoggedIn ] = useState(false);
     const [ userName, setUserName ] = useState("");
     const [ open, setOpen ] = useState(false);
+    const [ categories, setCategories] = useState<any>([]);
+    const [ selected, setSelected ] = useState("");
+
+    useEffect(() => {
+        const query = collection(db, "category");
+
+        getDocs(query).then((snapShot) => {
+            setCategories(snapShot.docs.map((doc) => ({ ...doc.data() })));
+        });
+    }, []);
 
     const token = localStorage.getItem("authToken");
     useEffect(() => {
@@ -51,30 +62,31 @@ function TopMenu(){
     return (
         <>
         <Header />
-        { menu === 0 && !loggedIn &&
+        { !loggedIn &&
         <>
-        <Container component = "main" maxWidth = "xs" sx ={{marginTop: 2}}>
-            <MenuButton icon = {<SearchIcon />} onClick = {() => setMenu(6)}>置場確認</MenuButton>
-        </Container>
-        <BottomButton icon = {<LoginIcon />}onClick = {() => setMenu(10)}>ログイン</BottomButton>
+        <div>
+            <Login loggedIn = {loggedIn} userName = {userName}
+            setLoggedIn = {setLoggedIn} setUserName = {setUserName}/>
+        </div>
         </>
         }
 
-        { menu === 0 &&
+        { selected === "" &&
         loggedIn &&
         <>
         <UserName>{userName}</UserName>
         <Container component = "main" maxWidth = "xs">
-            <MenuButton icon = {<ContentCopyIcon />} onClick = {() => setMenu(1)}>照合(大同現品票⇔東北命令書)</MenuButton>
-            <MenuButton icon = {<DifferenceIcon />} onClick = {() => setMenu(2)}>照合(大同現品票⇔東北現品票)</MenuButton>
-            <MenuButton icon = {<CompareArrowsIcon />} onClick = {() => setMenu(3)}>照合(東北命令書⇔東北現品票)</MenuButton>
-            <MenuButton icon = {<GetAppIcon />} onClick = {() => setMenu(4)}>素材検品</MenuButton>
-            <MenuButton icon = {<WarehouseIcon />} onClick = {() => setMenu(5)}>置場管理</MenuButton>
-            <MenuButton icon = {<SearchIcon />} onClick = {() => setMenu(6)}>置場確認</MenuButton>
-            <MenuButton icon = {<AssignmentTurnedInIcon />} onClick = {() => setMenu(7)}>点検</MenuButton>
+            {categories.map((category:any) => (
+                    <MenuButton key = {category.title} icon = "" onClick = {() => setSelected(category.title)}>{category.title}</MenuButton>
+                ))
+            }
         </Container>
         <BottomButton icon = {<LogoutIcon />}onClick = {() => setOpen(true)}>ログアウト</BottomButton>
         </>
+        }
+        { selected !== "" &&
+        loggedIn &&
+        <Todo selected = {selected} setSelected = {setSelected} />
         }
         <CustomDialog
             title = "ログアウトしました"
@@ -86,43 +98,6 @@ function TopMenu(){
             }}
             open = {open}
         />
-        {/* ログイン */}
-        { menu === 10 &&
-        <div>
-            <Login menu = {menu} loggedIn = {loggedIn} userName = {userName}
-            setMenu = {setMenu} setLoggedIn = {setLoggedIn} setUserName = {setUserName}/>
-        </div>
-        }
-        {/* 照合 */}
-        { (menu === 1 || menu === 2 || menu === 3) &&
-        <div>
-            <Collation menu = {menu} userName = {userName} setMenu = {setMenu}/>
-        </div>
-        }
-        {/* 素材検品 */}
-        { menu === 4 &&
-        <div>
-            <Inspection menu = {menu} userName = {userName} setMenu = {setMenu}/>
-        </div>
-        }
-        {/* 置場管理 */}
-        { menu === 5 &&
-        <div>
-            <StorageRegister menu = {menu} userName = {userName} setMenu = {setMenu}/>
-        </div>
-        }
-        {/* 置場確認 */}
-        { menu === 6 &&
-        <div>
-            <StorageSearch menu = {menu} userName = {userName} setMenu = {setMenu}/>
-        </div>
-        }
-        {/* 点検 */}
-        { menu === 7 &&
-        <div>
-            <Test menu = {menu} userName = {userName} setMenu = {setMenu}/>
-        </div>
-        }
         </>
     );
 

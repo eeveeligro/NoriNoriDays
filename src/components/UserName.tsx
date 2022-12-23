@@ -10,7 +10,7 @@ export const UserName = (props:UserNameProps) => {
 
     if (children){
         return (
-            <Typography textAlign = "right" component = "h2" variant = "subtitle1" margin = {2} >作業員：{children}</Typography>
+            <Typography textAlign = "right" component = "h2" variant = "subtitle1" margin = {2} >ユーザ：{children}</Typography>
         )
     } else return (
         <></>

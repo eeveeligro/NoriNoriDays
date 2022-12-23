@@ -10,9 +10,9 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import CustomDialog from "../components/CustomDialog";
 import { Title } from "../components/Title";
 
-function Login({menu, loggedIn, userName, setMenu, setLoggedIn, setUserName}:
-  {menu:number, loggedIn:boolean, userName:string,
-    setMenu:React.Dispatch<React.SetStateAction<number>>,
+function Login({ loggedIn, userName, setLoggedIn, setUserName}:
+  {loggedIn:boolean, userName:string,
+    // setMenu:React.Dispatch<React.SetStateAction<number>>,
     setLoggedIn:React.Dispatch<React.SetStateAction<boolean>>,
     setUserName:React.Dispatch<React.SetStateAction<string>>
   }) {
@@ -22,9 +22,8 @@ function Login({menu, loggedIn, userName, setMenu, setLoggedIn, setUserName}:
 
     function CallLoginApi () {
       const idList = [
-        {"id":"0000", "userName":"大田須太郎"},
-        {"id":"1234", "userName":"東北花子"},
-        {"id":"9999", "userName":"仙台太郎"},
+        {"id":"0309", "userName":"おり"},
+        {"id":"0717", "userName":"のり"},
       ];
 
       let idx = idList.findIndex(idx => idx.id === userId);
@@ -52,10 +51,10 @@ function Login({menu, loggedIn, userName, setMenu, setLoggedIn, setUserName}:
               <Avatar sx={{ m: 1, bgcolor: 'secondary.main'}}>
                 <LockOutlinedIcon />
               </Avatar>
-              <Typography variant = "subtitle1" sx = {{color: 'error.main'}}>従業員番号でログインしてください</Typography>
+              <Typography variant = "subtitle1" sx = {{color: 'error.main'}}>ログインしてください</Typography>
               <TextField
-                id = "従業員番号"
-                label = "従業員番号"
+                id = "id"
+                label = "ID"
                 variant = "outlined"
                 margin = "normal"
                 type = "tel"
@@ -84,13 +83,12 @@ function Login({menu, loggedIn, userName, setMenu, setLoggedIn, setUserName}:
           flagOnClose
           onClick = {()=>{
             setOpenSuccess(false);
-            setMenu(0);
+            // setMenu(0);
           }}
           open = {openSuccess}
         />
         <CustomDialog
-          title = "対象者不明"
-          text = "『従業員番号』を確認してください"
+          title = "IDを確認してください"
           buttonText = "閉じる"
           // flagOnClose
           onClick = {()=>{
@@ -98,7 +96,6 @@ function Login({menu, loggedIn, userName, setMenu, setLoggedIn, setUserName}:
           }}
           open = {openFailure}
         />
-        <BottomButton onClick = {() => setMenu(0)}>TOP MENU</BottomButton>
       </>
     );
   }

@@ -3,7 +3,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import FactoryIcon from '@mui/icons-material/Factory';
+import EmojiNatureIcon from '@mui/icons-material/EmojiNature';
 
 function Header() {
 
@@ -11,7 +11,7 @@ function Header() {
     <AppBar position="static" sx = {{bgcolor:"primary"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <FactoryIcon sx={{ mr: 1 }} />
+          <EmojiNatureIcon sx={{ mr: 1 }} />
           <Typography
             variant="h6"
             noWrap

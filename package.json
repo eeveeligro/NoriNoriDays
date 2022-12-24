@@ -1,7 +1,7 @@
 {
-  "name": "tohoku-app",
+  "name": "NoriNori-Days",
   "version": "0.1.0",
-  "homepage": "https://a-orgil.github.io/tohoku-app/",
+  "homepage": "https://eeveeligro.github.io/NoriNoriDays/",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",

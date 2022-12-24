@@ -1,25 +1,13 @@
 import { useState, useEffect } from 'react';
 import Header from './Header';
-import Collation from './Collation';
-import Inspection from './Inspection';
 import Login from './Login'
-import StorageSearch from './StorageSearch';
-import StorageRegister from './StorageRegister';
-import Test from './Test';
-import { Container } from '@mui/material';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import DifferenceIcon from '@mui/icons-material/Difference';
-import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
-import GetAppIcon from '@mui/icons-material/GetApp';
-import WarehouseIcon from '@mui/icons-material/Warehouse';
-import SearchIcon from '@mui/icons-material/Search';
-import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
+import { Button, Container } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { MenuButton } from '../components/MenuButton';
 import { BottomButton } from '../components/BottomButton';
 import { UserName } from '../components/UserName';
 import CustomDialog from '../components/CustomDialog';
-import { collection, doc, DocumentData, getDocs, QueryDocumentSnapshot } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import db from '../firebase';
 import Todo from './Todo';
 
@@ -34,7 +22,10 @@ function TopMenu(){
         const query = collection(db, "category");
 
         getDocs(query).then((snapShot) => {
-            setCategories(snapShot.docs.map((doc) => ({ ...doc.data() })));
+            // setCategories(snapShot.docs.map((doc) => ({ ...doc.data() })));
+            // console.log(snapShot.docs.map((doc) => ({ ...doc })));
+            // console.log(doc)
+            setCategories(snapShot.docs);
         });
     }, []);
 
@@ -77,7 +68,9 @@ function TopMenu(){
         <UserName>{userName}</UserName>
         <Container component = "main" maxWidth = "xs">
             {categories.map((category:any) => (
-                    <MenuButton key = {category.title} icon = "" onClick = {() => setSelected(category.title)}>{category.title}</MenuButton>
+                    <MenuButton key = {category.id} icon = "" onClick = {() => setSelected(category.data().title)}>{category.data().title}</MenuButton>
+                    // <Button>{category.id}</Button>
+                    // <MenuButton key = {category.id} icon = "" onClick = {() => setSelected(category.data().title)}>{category.data().title}</MenuButton>
                 ))
             }
         </Container>
@@ -102,5 +95,4 @@ function TopMenu(){
     );
 
 }
-
 export default TopMenu;

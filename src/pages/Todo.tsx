@@ -81,6 +81,33 @@ function Todo({selected, setSelected }:{selected:any, setSelected:React.Dispatch
                     display = "flex"
                     direction = "column"
                     >
+                <Grid item>
+                    <Grid container
+                        display = 'flex'
+                        alignItems = 'center'>
+                        <Grid item xs = {10}>
+                            <TextField
+                                inputRef = {textRef}
+                                id = "newTodo"
+                                label = "新規"
+                                variant = "outlined"
+                                margin = "normal"
+                                fullWidth
+                                onChange={(e) => setNewTodo(e.target.value)}
+                                onKeyDown = {e => {
+                                    if (e.key == 'Enter'){
+                                        addTodo();
+                                    }
+                                }}
+                            />
+                        </Grid>
+                        <Grid item xs = {2}>
+                            <IconButton onClick = {addTodo} color = "primary">
+                                <SendIcon />
+                            </IconButton>
+                        </Grid>
+                    </Grid>
+                </Grid>
                     {todoList.map((todo:any) => (
                         // <MenuButton key = {category.id} icon = "" onClick = {() => setSelected(category.data().title)}>{category.data().title}</MenuButton>
                         // <MenuButton key = {todo.id} icon = "" onClick = {() => {}}>{todo.data().title}</MenuButton>
@@ -122,33 +149,6 @@ function Todo({selected, setSelected }:{selected:any, setSelected:React.Dispatch
                         ))
                     }
                 <Grid item>
-                    <Grid container
-                        display = 'flex'
-                        alignItems = 'center'>
-                        <Grid item xs = {10}>
-                            <TextField
-                                inputRef = {textRef}
-                                id = "newTodo"
-                                label = "新規"
-                                variant = "outlined"
-                                margin = "normal"
-                                fullWidth
-                                onChange={(e) => setNewTodo(e.target.value)}
-                                onKeyDown = {e => {
-                                    if (e.key == 'Enter'){
-                                        addTodo();
-                                    }
-                                }}
-                            />
-                        </Grid>
-                        <Grid item xs = {2}>
-                            <IconButton onClick = {addTodo} color = "primary">
-                                <SendIcon />
-                            </IconButton>
-                        </Grid>
-                    </Grid>
-                </Grid>
-                <Grid item>
                     <Typography variant = "h5">実行済み</Typography>
                 </Grid>
                 {doneList.map((todo:any) => (
@@ -178,8 +178,8 @@ function Todo({selected, setSelected }:{selected:any, setSelected:React.Dispatch
                                         textAlign = "left"
                                         sx = {{m:1}}
                                         >
-                                        達成日：yyyy/mm/dd
-                                        {/* {todo.data().updated_at} */}
+                                        達成日：
+                                        {todo.data().updated_at.toDate().toLocaleDateString()}
                                     </Typography>
                                 </Grid>
                                 </Grid>

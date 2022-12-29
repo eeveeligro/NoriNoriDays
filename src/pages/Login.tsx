@@ -12,7 +12,6 @@ import { Title } from "../components/Title";
 
 function Login({ loggedIn, userName, setLoggedIn, setUserName}:
   {loggedIn:boolean, userName:string,
-    // setMenu:React.Dispatch<React.SetStateAction<number>>,
     setLoggedIn:React.Dispatch<React.SetStateAction<boolean>>,
     setUserName:React.Dispatch<React.SetStateAction<string>>
   }) {

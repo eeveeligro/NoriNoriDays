@@ -16,15 +16,13 @@ function TopMenu(){
     const [ userName, setUserName ] = useState("");
     const [ open, setOpen ] = useState(false);
     const [ categories, setCategories] = useState<any>([]);
-    const [ selected, setSelected ] = useState("");
+    const [ selected, setSelected ] = useState<any>();
 
     useEffect(() => {
         const query = collection(db, "category");
 
         getDocs(query).then((snapShot) => {
             // setCategories(snapShot.docs.map((doc) => ({ ...doc.data() })));
-            // console.log(snapShot.docs.map((doc) => ({ ...doc })));
-            // console.log(doc)
             setCategories(snapShot.docs);
         });
     }, []);
@@ -62,22 +60,21 @@ function TopMenu(){
         </>
         }
 
-        { selected === "" &&
+        { selected === undefined &&
         loggedIn &&
         <>
         <UserName>{userName}</UserName>
         <Container component = "main" maxWidth = "xs">
             {categories.map((category:any) => (
-                    <MenuButton key = {category.id} icon = "" onClick = {() => setSelected(category.data().title)}>{category.data().title}</MenuButton>
-                    // <Button>{category.id}</Button>
                     // <MenuButton key = {category.id} icon = "" onClick = {() => setSelected(category.data().title)}>{category.data().title}</MenuButton>
+                    <MenuButton key = {category.id} icon = "" onClick = {() => setSelected(category)}>{category.data().title}</MenuButton>
                 ))
             }
         </Container>
         <BottomButton icon = {<LogoutIcon />}onClick = {() => setOpen(true)}>ログアウト</BottomButton>
         </>
         }
-        { selected !== "" &&
+        { selected !== undefined &&
         loggedIn &&
         <Todo selected = {selected} setSelected = {setSelected} />
         }

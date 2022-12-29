@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/NoriNoriDays/static/css/main.318eb18b.css",
-    "main.js": "/NoriNoriDays/static/js/main.b41ee801.js",
-    "static/js/787.552dbfca.chunk.js": "/NoriNoriDays/static/js/787.552dbfca.chunk.js",
+    "main.js": "/NoriNoriDays/static/js/main.ef5d27eb.js",
+    "static/js/787.056dd1d3.chunk.js": "/NoriNoriDays/static/js/787.056dd1d3.chunk.js",
     "service-worker.js": "/NoriNoriDays/service-worker.js",
     "index.html": "/NoriNoriDays/index.html",
     "main.318eb18b.css.map": "/NoriNoriDays/static/css/main.318eb18b.css.map",
-    "main.b41ee801.js.map": "/NoriNoriDays/static/js/main.b41ee801.js.map",
-    "787.552dbfca.chunk.js.map": "/NoriNoriDays/static/js/787.552dbfca.chunk.js.map"
+    "main.ef5d27eb.js.map": "/NoriNoriDays/static/js/main.ef5d27eb.js.map",
+    "787.056dd1d3.chunk.js.map": "/NoriNoriDays/static/js/787.056dd1d3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.318eb18b.css",
-    "static/js/main.b41ee801.js"
+    "static/js/main.ef5d27eb.js"
   ]
 }

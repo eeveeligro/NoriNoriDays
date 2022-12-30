@@ -10,6 +10,7 @@ import CustomDialog from '../components/CustomDialog';
 import { collection, getDocs } from 'firebase/firestore';
 import db from '../firebase';
 import Todo from './Todo';
+import { Copyright } from './Copyright';
 
 function TopMenu(){
     const [ loggedIn, setLoggedIn ] = useState(false);
@@ -72,6 +73,7 @@ function TopMenu(){
             }
         </Container>
         <BottomButton icon = {<LogoutIcon />}onClick = {() => setOpen(true)}>ログアウト</BottomButton>
+        <Copyright sx={{ mt: 3 }} />
         </>
         }
         { selected !== undefined &&

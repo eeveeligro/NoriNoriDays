@@ -179,7 +179,7 @@ function Todo({selected, setSelected }:{selected:any, setSelected:React.Dispatch
                                         sx = {{m:1}}
                                         >
                                         達成日：
-                                        {todo.data().updated_at.toDate().toLocaleDateString()}
+                                        {todo.data().updated_at?todo.data().updated_at.toDate().toLocaleDateString():""}
                                     </Typography>
                                 </Grid>
                                 </Grid>
